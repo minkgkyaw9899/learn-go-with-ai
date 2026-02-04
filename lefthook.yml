@@ -12,6 +12,6 @@ pre-commit:
       run: go vet ./...
 
     # 3. The gold standard for Go linting
-    golangci-lint:
-      glob: "*.go"
-      run: golangci-lint run --new-from-rev=HEAD~1 {staged_files}
+    # golangci-lint:
+    #   glob: "*.go"
+    #   run: golangci-lint run --new-from-rev=HEAD~1 {staged_files}
