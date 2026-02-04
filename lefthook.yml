@@ -1,0 +1,17 @@
+pre-commit:
+  parallel: true
+  commands:
+    # 1. Format your code
+    go-fmt:
+      glob: "*.go"
+      run: gofmt -w {staged_files} && git add {staged_files}
+    
+    # 2. Catch common mistakes (shadowing, unreachable code, etc.)
+    go-vet:
+      glob: "*.go"
+      run: go vet ./...
+
+    # 3. The gold standard for Go linting
+    golangci-lint:
+      glob: "*.go"
+      run: golangci-lint run --new-from-rev=HEAD~1 {staged_files}
