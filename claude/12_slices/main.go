@@ -13,6 +13,7 @@ import "fmt"
 // Slicing: slice[start:end]
 
 func main() {
+	// Example 1: Creating and Using Slices
 	numbers := []int{10, 20, 30, 40, 50}
 
 	fmt.Println("Slice:", numbers)
