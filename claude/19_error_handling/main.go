@@ -92,6 +92,51 @@ func startServer() error {
 	return nil
 }
 
+// Exercises 1: Create a function withdrawMoney(balance, amount float64) (float64, error) that returns an error if amount is negative or exceeds balance.
+
+func withdrawMoney(balance, amount float64) (float64, error) {
+	if amount < 0 {
+		return balance, errors.New("amount cannot be negative")
+	}
+	if amount > balance {
+		return balance, errors.New("amount exceeds balance")
+	}
+	return balance - amount, nil
+}
+
+// Exercises 2: Create a custom error type FileError with fields Filename and Reason. Use it in a function that simulates file operations.
+
+type FileError struct {
+	Filename string
+	Reason   string
+}
+
+func (e *FileError) Error() string {
+	return fmt.Sprintf("file error %s in %s", e.Filename, e.Reason)
+}
+
+func openFile(filename string) error {
+	return &FileError{Filename: filename, Reason: "file not found"}
+}
+
+// Exercises 3: Write a function parseDate(dateStr string) (day, month, year int, err error) that parses a date string "DD/MM/YYYY" and returns appropriate errors for invalid formats.
+
+func parseDate(dateStr string) (day, month, year int, err error) {
+	_, err = fmt.Sscanf(dateStr, "%d/%d/%d", &day, &month, &year)
+	if err != nil {
+		return 0, 0, 0, errors.New("invalid date format, expected DD/MM/YYYY")
+	}
+
+	if day < 1 || day > 31 {
+		return 0, 0, 0, errors.New("day must be between 1 and 31")
+	}
+	if month < 1 || month > 12 {
+		return 0, 0, 0, errors.New("month must be between 1 and 12")
+	}
+
+	return day, month, year, nil
+}
+
 func main() {
 	// Example 1: Division
 	result, err := divide(10, 2)
